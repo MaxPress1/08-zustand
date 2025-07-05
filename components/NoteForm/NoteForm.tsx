@@ -1,6 +1,5 @@
 "use client";
 
-import { ErrorMessage } from "formik";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createNote } from "@/lib/api";
 import css from "./NoteForm.module.css";
