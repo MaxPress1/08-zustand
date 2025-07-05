@@ -1,5 +1,6 @@
 import { fetchNoteById } from "@/lib/api";
 import NoteDetailsClient from "./NoteDetails.client";
+import type { Metadata } from "next";
 import {
   dehydrate,
   HydrationBoundary,
@@ -10,7 +11,9 @@ type NoteDetailsProps = {
   params: Promise<{ id: string }>;
 };
 
-export async function generateMetadata({ params }: NoteDetailsProps) {
+export async function generateMetadata({
+  params,
+}: NoteDetailsProps): Promise<Metadata> {
   const { id } = await params;
   const newId = Number(id);
   const note = await fetchNoteById(newId);

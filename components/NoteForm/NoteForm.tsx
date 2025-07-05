@@ -5,7 +5,7 @@ import { createNote } from "@/lib/api";
 import css from "./NoteForm.module.css";
 import { useRouter } from "next/navigation";
 import { NewNoteData, Tag } from "@/types/note";
-import { useNoteDraft } from "@/lib/store/noteDraftStore";
+import { useNoteDraft } from "@/lib/store/noteStore";
 import { ChangeEvent } from "react";
 
 export default function NoteForm() {
@@ -61,11 +61,10 @@ export default function NoteForm() {
 
         <label className={css.label}>
           Content
-          <input
+          <textarea
             required
             defaultValue={draft.content}
             name="content"
-            type="textarea"
             className={css.textarea}
             onChange={handleChange}
           />

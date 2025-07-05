@@ -1,5 +1,6 @@
 import NotesClient from "./Notes.client";
 import { fetchNotes } from "@/lib/api";
+import type { Metadata } from "next";
 import {
   dehydrate,
   HydrationBoundary,
@@ -10,15 +11,18 @@ type NotesProps = {
   params: Promise<{ slug: string[] }>;
 };
 
-export async function generateMetadata({ params }: NotesProps) {
+export async function generateMetadata({
+  params,
+}: NotesProps): Promise<Metadata> {
   const { slug } = await params;
+  const tag = slug[0] === "All" ? "" : slug[0];
   return {
-    title: `Notes type: ${slug}`,
+    title: `Notes type: ${tag}`,
     description: "Here is the note type described",
     openGraph: {
-      title: `Notes type: ${slug}`,
+      title: `Notes type: ${tag}`,
       description: "Here is the note type described",
-      url: `https://07-routing-nextjs-ochre.vercel.app/filter/${slug}`,
+      url: `https://07-routing-nextjs-ochre.vercel.app/filter/${tag}`,
       siteName: "NoteHub",
       images: [
         {
@@ -32,7 +36,7 @@ export async function generateMetadata({ params }: NotesProps) {
     },
     twitter: {
       card: "summary_large_image",
-      title: `Notes type: ${slug}`,
+      title: `Notes type: ${tag}`,
       description: "Here is the note type described",
       images: ["https://ac.goit.global/fullstack/react/og-meta.jpg"],
     },
